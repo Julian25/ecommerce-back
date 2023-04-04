@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import routes from './routes';
 
 const port = process.env.PORT;
 const url = process.env.MONGO_URL;
@@ -27,6 +28,6 @@ if (process.env.NODE_ENV  !== 'test') {
     });
 }
 
-
+app.use('/', routes);
 
 export default app;
