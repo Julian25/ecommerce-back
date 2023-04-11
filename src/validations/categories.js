@@ -25,7 +25,6 @@ export const updateCategoryValidation = (req, res, next) => {
         .min(3)
         .max(30)
         .pattern(/^[A-Za-z0-9 ]+$/)
-        .required()
     })
     const valid = updateCategory.validate(req.body);
     if(valid.error) {
