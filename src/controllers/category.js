@@ -54,7 +54,7 @@ export const createCategory = async (req,res) => {
             ...req.body
         });
         await newCategory.save();
-        return res.status(200).json({
+        return res.status(201).json({
             message: 'New category successfully created',
             data: newCategory,
             error: false,
