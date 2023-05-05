@@ -1,7 +1,9 @@
 import express from 'express';
 import { getAllProducts, 
     deleteProductById, createProduct,
-    updateProduct, getProductById } from '../controllers/product';
+    updateProduct, getProductById } 
+from '../controllers/product';
+import { createProductValidation, updateProductValidation } from '../validations/products';
 
 
 const router = express.Router();
@@ -9,8 +11,8 @@ const router = express.Router();
 router
     .get('/', getAllProducts)
     .get('/:id', getProductById)
-    .post('/', createProduct)
-    .put('/:id', updateProduct)
+    .post('/',createProductValidation, createProduct)
+    .put('/:id', updateProductValidation, updateProduct)
     .delete('/:id', deleteProductById)
 
 export default router;

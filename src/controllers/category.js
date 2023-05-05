@@ -39,7 +39,7 @@ export const deleteCategory = async (req,res) => {
         })
     } catch (error) {
         return res.status(400).json({
-            message:'There was an error',
+            message:error.message,
             data: undefined,
             error: true,
         });

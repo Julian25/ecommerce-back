@@ -1,4 +1,4 @@
-import Admin from '../models/Admins';
+import Admin from '../models/Admin';
 import Firebase from '../helper/firebase';
 
 
@@ -14,13 +14,38 @@ export const getAllAdmins = async (req, res) => {
         });
     } catch (error) {
         return res.status(400).json({
-            message: 'There was an error',
+            message: error.message,
             data: undefined,
             error: true
         });
     }
 };
 
+// get Authenticated admin
+export const getAuthAdmin = async (req, res) => {
+    try {
+        const admin = await Admin.findOne({fireBaseUid: req.headers.firebaseUid });
+        if (!admin) {
+            return restart.status(404).json({
+                message: 'User not found',
+                data: undefined,
+                error: false,
+            })
+        }
+
+        return res.status(201).json({
+            message: 'Admin found',
+            data: admin,
+            error: false
+        })
+    } catch (error) {
+        return res.status(400).json({
+            message: error.toString(),
+            data: undefined,
+            error: true,
+        })
+    }
+}
 //delete admin
 
 export const deleteAdmin = async (req,res) => {
@@ -40,7 +65,7 @@ export const deleteAdmin = async (req,res) => {
         });
     } catch (error) {
         return res.status(400).json({
-            message: 'There was an error',
+            message: error.message,
             data: undefined,
             error: true,
         });
@@ -59,22 +84,22 @@ export const createAdmin = async (req, res) => {
         await Firebase.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'Admin' });
         const newAdmin = new Admin({
             firebaseUid: newFirebaseUser.uid,
-            firsName: req.body.firstName,
+            firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
         });
-        await newAdmin.save();
+        const result = await newAdmin.save();
         return res.status(201).json({
             message: 'New Admin created',
-            data: newAdmin,
+            data: result,
             error: false
-        })
+        });
     } catch (error) {
         if(firebaseUid) {
             await Firebase.default.auth().deleteUser(firebaseUid);
         }
         return res.status(400).json({
-            message: 'There was an error',
+            message: error.message,
             data: undefined,
             error: true,
         });

@@ -1,18 +1,17 @@
 import Joi from "joi";
 
-export const createProductValidation = (req, req, next) => {
+export const createProductValidation = (req, res, next) => {
     const newProduct = Joi.object({
         name: Joi
             .string()
             .min(4)
-            .max(30)
+            .max(40)
             .required()
-            .pattern(/^[A-Za-z0-9 ]+$/)
             .label('Name'),
         description: Joi
             .string()
             .min(10)
-            .max(140)
+            .max(200)
             .required()
             .label('Description'),
         price: Joi
@@ -30,7 +29,7 @@ export const createProductValidation = (req, req, next) => {
 
     const validation = newProduct.validate(req.body);
     if(validation.error) {
-        return resizeBy.status(400).json({
+        return res.status(400).json({
             message: validation.error.details[0].message,
             data: undefined,
             error: true,

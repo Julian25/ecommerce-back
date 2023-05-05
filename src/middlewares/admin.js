@@ -1,8 +1,7 @@
 import firebase from '../helper/firebase';
 
 export const adminMiddleware = async (req, res, next) => {
-    try {
-        const { token } = req.headers;
+    const { token } = req.headers;
 
         if(!token) {
             return res.status(401).json({
@@ -11,16 +10,19 @@ export const adminMiddleware = async (req, res, next) => {
                 error: true,
             });
         }
+    try {
 
-        const { role } = await firebase.auth().verifyIdToken(token);
 
-        if(!role) {
+        const response = await firebase.auth().verifyIdToken(token);
+
+        if(!response.role) {
             return res.status(403).json({
                 message: 'No credentials found',
                 data: undefined,
                 error: true,
             });
         }
+        req.headers.firebaseUid = response.uid;
         return next();
     } catch (error) {
         return res.status(403).json({
