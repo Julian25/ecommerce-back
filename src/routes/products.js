@@ -9,8 +9,6 @@ import { createProductValidation, updateProductValidation } from '../validations
 const router = express.Router();
 
 router
-    .get('/', getAllProducts)
-    .get('/:id', getProductById)
     .post('/',createProductValidation, createProduct)
     .put('/:id', updateProductValidation, updateProduct)
     .delete('/:id', deleteProductById)

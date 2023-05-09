@@ -85,7 +85,7 @@ export const updateProduct = async (req,res) => {
             });
         }
         return res.status(200).json({
-            message: 'Product successfully deleted',
+            message: 'Product successfully updated',
             data: updatedProduct,
             error: false
         });

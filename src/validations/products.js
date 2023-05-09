@@ -43,13 +43,12 @@ export const updateProductValidation = (req, res, next) => {
         name: Joi
             .string()
             .min(4)
-            .max(30)
-            .pattern(/^[A-Za-z0-9 ]+$/)
+            .max(40)
             .label('Name'),
         description: Joi
             .string()
             .min(10)
-            .max(140)
+            .max(200)
             .label('Description'),
         price: Joi
             .number()
@@ -58,6 +57,7 @@ export const updateProductValidation = (req, res, next) => {
             .string()
             .label('Category'),
         pictures: Joi
+            .required()
             .label('Pictures'),
     });
     const validation = updatedProduct.validate(req.body);
