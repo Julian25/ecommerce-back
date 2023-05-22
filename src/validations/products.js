@@ -10,13 +10,13 @@ export const createProductValidation = (req, res, next) => {
             .label('Name'),
         description: Joi
             .string()
-            .min(10)
+            .min(0)
             .max(200)
-            .required()
             .label('Description'),
         price: Joi
             .number()
-            .required()
+            .optional()
+            .allow('')
             .label('Price'),
         category: Joi
             .string()
@@ -47,7 +47,7 @@ export const updateProductValidation = (req, res, next) => {
             .label('Name'),
         description: Joi
             .string()
-            .min(10)
+            .min(0)
             .max(200)
             .label('Description'),
         price: Joi

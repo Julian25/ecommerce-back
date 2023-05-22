@@ -9,7 +9,7 @@ export const getAllCategories = async (req,res) => {
         return res.status(200).json({
             message: 'All categories found',
             data: allCategories,
-            error: false.valueOf,
+            error: false,
         });
     } catch (error) {
         return res.status(400).json({
