@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllCategories, deleteCategory,
+import { deleteCategory,
 createCategory, updateCategory, 
 findCategoryById  } from '../controllers/category';
 import { createCategoryValidation, updateCategoryValidation } from '../validations/categories';
@@ -8,7 +8,6 @@ import { createCategoryValidation, updateCategoryValidation } from '../validatio
 const router = express.Router();
 
 router
-    .get('/', getAllCategories)
     .get('/:id', findCategoryById)
     .post('/', createCategoryValidation, createCategory)
     .put('/:id',updateCategoryValidation, updateCategory)
