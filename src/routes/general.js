@@ -7,6 +7,6 @@ const router = express.Router();
 router
     .get('/', getAllProducts)
     .get('/:id', getProductById)
-    .get('/', getAllCategories)
+    .get('/categories', getAllCategories)
 
 export default router;
