@@ -24,16 +24,16 @@ export const getAllAdmins = async (req, res) => {
 // get Authenticated admin
 export const getAuthAdmin = async (req, res) => {
     try {
-        const admin = await Admin.findOne({fireBaseUid: req.headers.firebaseUid });
+        const admin = await Admin.findOne({ firebaseUid: req.params.uid});
         if (!admin) {
-            return restart.status(404).json({
+            return res.status(404).json({
                 message: 'User not found',
                 data: undefined,
                 error: false,
             })
         }
 
-        return res.status(201).json({
+        return res.status(200).json({
             message: 'Admin found',
             data: admin,
             error: false

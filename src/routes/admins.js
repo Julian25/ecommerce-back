@@ -14,8 +14,7 @@ const router = express.Router();
 
 router
     .get('/', getAllAdmins)
-    .get('/auth', getAuthAdmin)
-    .get('/:id', findAdminById)
+    .get('/:uid', getAuthAdmin)
     .post('/', createAdminValidation, createAdmin)
     .put('/:id',updateAdminValidation, updateAdmin)
     .delete('/:id', deleteAdmin)
